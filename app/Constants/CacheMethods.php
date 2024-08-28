@@ -1,7 +1,8 @@
 <?php
 namespace App\Constants;
 
-class CacheMethods {
+abstract class CacheMethods {
     const JSON = 'json';
+    const APCU = 'apcu';
     const REDIS = 'redis';
 }

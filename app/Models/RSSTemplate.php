@@ -1,18 +1,16 @@
 <?php
 namespace App\Models;
 
-/**
-* Base for templates with a feed
-*/
-class RSSTemplate {
-    public string $title;
+class RSSTemplate extends BaseTemplate {
     public string $desc;
+    public string $image;
     public string $link;
     public array $items;
 
-    function __construct(string $title, string $desc, string $link, array $items) {
-        $this->title = $title;
+    function __construct(string $title, string $desc, string $image, string $link, array $items) {
+        parent::__construct($title);
         $this->desc = $desc;
+        $this->image = $image;
         $this->link = $link;
         $this->items = $items;
     }

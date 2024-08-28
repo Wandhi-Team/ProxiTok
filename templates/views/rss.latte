@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>{$title}</title>
+		<description><![CDATA[{$desc}]]></description>
+		{if $image}
+		<image>
+			<link>{$link}</link>
+			<title>{$title}</title>
+			<url>{$image}</url>
+		</image>
+		{/if}
+		<link>{$link}</link>
+		<atom:link href="{$link . '/rss'}" rel="self" type="application/rss+xml"></atom:link>
+		{foreach $items as $item}
+			<item>
+				<title>{$item->desc}</title>
+				<description><![CDATA[<p n:ifcontent>{render_desc($item->desc, $item->textExtra ?? [])|noescape}</p>{include '../components/themes/common/content.latte', item: $item, isAutoplay: false, isSimple: true}]]></description>
+				<link>{url_video_internal($item->author->uniqueId, $item->id)}</link>
+				<pubDate>{date('r', $item->createTime)}</pubDate>
+				<guid isPermaLink="false">{$item->id}</guid>
+				<dc:creator>@{$item->author->uniqueId}</dc:creator>
+			</item>
+		{/foreach}
+	</channel>
+</rss>
